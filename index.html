@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delhi Weather</title>
+
+    <script src="weatherscript.js" defer></script>
+
+    <style>
+        body {
+            background-color: rgb(196, 211, 224);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .weather-card {
+            background-color: white;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            color: #245a91;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 20px;
+            color: #333333;
+        }
+
+        #temperature {
+            font-size: 26px;
+            font-weight: bold;
+            color: #245a91;
+        }
+
+        button {
+            background-color: #245a91;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #173e66;
+        }
+
+        .rainy {
+            background-color: lightblue;
+        }
+
+        .sunny {
+            background-color: lightyellow;
+        }
+
+        .dark-mode {
+            background-color: #313030;
+            color: grey;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="weather-card">
+
+        <h1>Delhi Weather</h1>
+
+        <p id="time">Current Time: Loading...</p>
+
+        <p id="temperature">Temperature: Loading...</p>
+
+        <p id="rain">Rain: Loading...</p>
+
+        <button id="refresh">Refresh Weather</button>
+
+        <p id="message"></p>
+
+    </div>
+
+</body>
+
+</html>
