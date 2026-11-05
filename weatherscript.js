@@ -1,91 +1,69 @@
-// const: predefined JavaScript keyword.
-// weatherURL: user-defined variable name.
-// "..." : string literal.
 
+ // API URL
+// const = JavaScript keyword; weatherURL = user-defined variable.
 const weatherURL = "https://api.open-meteo.com/v1/forecast?latitude=28.6519&longitude=77.2315&current=temperature_2m,rain&timezone=Asia%2FKolkata";
 
 
-// function: predefined JavaScript keyword.
-// getWeather: user-defined function name.
-// (): parameter list, currently empty.
+// MAIN FUNCTION
+// function = JavaScript keyword; getWeather = user-defined function.
 
 function getWeather() {
 
-    // document: browser-provided global object.
-    // getElementById(): built-in DOM method.
-    // "message": string argument, matching an HTML ID.
-    // textContent: DOM property.
-
+    // DOM: document object, getElementById() method, textContent property.
     document.getElementById("message").textContent =
         "Loading weather...";
 
 
-    // fetch(): built-in browser Fetch API function.
-    // weatherURL: user-defined variable.
-    // Returns a Promise.
+    // FETCH API
+    // fetch() = built-in browser function; returns a Promise.
 
     fetch(weatherURL)
 
-
-        // then(): built-in Promise method.
-        // function(response): callback function.
-        // response: parameter name chosen by us.
-        // if: predefined JavaScript keyword.
-        // !: logical NOT operator.
-        // ok: property of the Response object.
-        // throw: predefined JavaScript keyword.
-        // Error: built-in JavaScript constructor.
+        // then() = Promise method.
+        // response = user-defined parameter; Response object is supplied by fetch.
 
         .then(function(response) {
+
+            // ok = Response property; ! = NOT operator.
+            // throw = JavaScript keyword; Error = built-in constructor.
 
             if (!response.ok) {
                 throw new Error("Could not fetch weather data");
             }
 
-            // json(): built-in Response method.
-            // return: predefined JavaScript keyword.
-
+            // json() = Response method; return = JavaScript keyword.
             return response.json();
         })
 
 
-        // then(): built-in Promise method.
-        // function(data): callback function.
-        // data: user-defined parameter name.
-        // data.current: current property provided by the API.
+        // SECOND THEN
+        // data = user-defined parameter containing parsed API data.
 
         .then(function(data) {
 
-            // currentWeather: user-defined variable.
-            // data.current: property from the API response.
+            // currentWeather = user-defined variable.
+            // current = property provided by the API.
 
             let currentWeather = data.current;
 
 
-            // time: user-defined variable.
-            // currentWeather.time: property from the API.
-            // slice(): built-in JavaScript string method.
-            // 11 and 16: numerical arguments.
+            // time = user-defined variable.
+            // time = API property; slice() = built-in string method.
 
             let time = currentWeather.time.slice(11, 16);
 
 
-            // temperature: user-defined variable.
-            // temperature_2m: property provided by the API.
-
+            // temperature_2m = API property.
             let temperature = currentWeather.temperature_2m;
 
 
-            // rain: user-defined variable.
-            // rain: property provided by the API.
-
+            // rain = API property.
             let rain = currentWeather.rain;
 
 
-            // if and else: predefined JavaScript keywords.
-            // >: greater-than comparison operator.
-            // console: browser-provided global object.
-            // log(): built-in console method.
+            // CONDITIONAL STATEMENT
+            // if/else = JavaScript keywords; > = comparison operator.
+            // console.log() = built-in console method.
 
             if (temperature > 30) {
                 console.log("Hot in Delhi.");
@@ -94,81 +72,56 @@ function getWeather() {
             }
 
 
-            // document: browser-provided global object.
-            // getElementById(): built-in DOM method.
-            // textContent: DOM property.
-            // time: HTML element ID.
-            // +: string concatenation operator.
-            // parts of the displayed text are string literals.
+            // DOM MANIPULATION
+            // getElementById() = DOM method; textContent = DOM property.
+            // + = string concatenation operator.
 
             document.getElementById("time").textContent =
                 "Current Time in Delhi: " + time;
 
-
-            // temperature: user-defined variable.
-            // " °C": string literal.
-            // +: string concatenation operator.
-
             document.getElementById("temperature").textContent =
                 "Temperature: " + temperature + " °C";
-
-
-            // rain: user-defined variable.
-            // " mm": string literal.
 
             document.getElementById("rain").textContent =
                 "Rain: " + rain + " mm";
 
 
-            // message: HTML element ID.
-            // textContent: DOM property.
-
+            // SUCCESS MESSAGE
             document.getElementById("message").textContent =
                 "Weather updated successfully!";
 
         })
 
 
-        // catch(): built-in Promise method.
-        // function(error): callback function.
-        // error: user-defined parameter name.
+        // ERROR HANDLING
+        // catch() = Promise method; error = user-defined parameter.
 
         .catch(function(error) {
 
-            // console.error(): built-in console method.
-            // error: parameter containing error information.
+            // console.error() = built-in console method.
 
             console.error("Error fetching weather data:", error);
-
-
-            // getElementById(): built-in DOM method.
-            // textContent: DOM property.
-            // "message": HTML element ID.
 
             document.getElementById("message").textContent =
                 "Could not load weather. Please try again.";
 
         });
 
-}
+} // End of getWeather function.
 
 
-// getWeather: user-defined function.
-// (): function call syntax.
-
+// FUNCTION CALL
 getWeather();
 
 
-// getElementById(): built-in DOM method.
-// addEventListener(): built-in DOM method.
-// "click": event type string.
-// getWeather: function reference.
+// REFRESH BUTTON
+// addEventListener() = DOM method; "click" = event type.
 
 document.getElementById("refresh").addEventListener("click", getWeather);
 
 
-// setInterval(): built-in browser function.
-// getWeather: function reference.
-// 60000: numerical argument in milliseconds.
+// AUTOMATIC UPDATE
+// setInterval() = built-in browser function.
+// 60000 = milliseconds (one minute).
 
 setInterval(getWeather, 60000);
